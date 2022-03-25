@@ -10,7 +10,8 @@
     "airbnb",
     "airbnb-typescript",
     "plugin:import/typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "eslint:recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,7 +22,14 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "import", "jsx-a11y", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "import",
+    "unused-imports",
+    "jsx-a11y",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
     "quotes": [
       "error",
@@ -40,6 +48,24 @@
     "react/jsx-uses-react": ["off"],
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-props-no-spreading": ["warn"],
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-imports-ts": 2,
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ]
   }
 }
