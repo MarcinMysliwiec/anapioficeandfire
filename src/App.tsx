@@ -5,9 +5,13 @@ import "./App.css";
 import AddTutorial from "./components/AddTutorial";
 import Tutorial from "./components/Tutorial";
 import TutorialsList from "./components/TutorialsList";
+import CharactersList from "./components/CharactersList";
+
 // const App: React.FC = () => {
 
 function App() {
+  console.log(process.env.REACT_APP_ANAPIOFICEANDFIRE_API);
+
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -34,6 +38,8 @@ function App() {
           <Route path="/tutorials" element={<TutorialsList />} />
           <Route path="/add" element={<AddTutorial />} />
           <Route path="/tutorials/:id" element={<Tutorial />} />
+
+          <Route path="/characters" element={<CharactersList />} />
         </Routes>
       </div>
     </div>
