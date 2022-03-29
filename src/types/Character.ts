@@ -11,6 +11,7 @@ export default interface ICharacterData {
   father: string;
   mother: string;
   spouse: string;
+  allegiances: string[];
   books: string[];
   povBooks: string[];
   tvSeries: string[];

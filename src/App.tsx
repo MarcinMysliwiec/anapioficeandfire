@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import AddTutorial from "./components/AddTutorial";
+import { Container } from "@mui/material";
 import Tutorial from "./components/Tutorial";
 import TutorialsList from "./components/TutorialsList";
 import CharactersList from "./components/CharactersList";
@@ -10,10 +10,8 @@ import CharactersList from "./components/CharactersList";
 // const App: React.FC = () => {
 
 function App() {
-  console.log(process.env.REACT_APP_ANAPIOFICEANDFIRE_API);
-
   return (
-    <div>
+    <Container>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/tutorials" className="navbar-brand">
           bezKoder
@@ -34,15 +32,14 @@ function App() {
 
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<TutorialsList />} />
-          <Route path="/tutorials" element={<TutorialsList />} />
-          <Route path="/add" element={<AddTutorial />} />
-          <Route path="/tutorials/:id" element={<Tutorial />} />
+          <Route path="/" element={<CharactersList />} />
+          <Route path="/:id" element={<CharactersList />} />
 
-          <Route path="/characters" element={<CharactersList />} />
+          <Route path="/tutorials" element={<TutorialsList />} />
+          <Route path="/tutorials/:id" element={<Tutorial />} />
         </Routes>
       </div>
-    </div>
+    </Container>
   );
 }
 

@@ -1,25 +1,23 @@
 import http from "../helpers/http-common-anapioficeandfire";
 import ICharacterData from "../types/Character";
-import { PaginateProps } from "../types/Props";
+import { ApiParams } from "../types/Props";
+import { getIndexFromURL } from "../helpers/string";
 
-const getAll = () => {
-  return http.get<Array<ICharacterData>>("/characters");
-};
-
-const paginate = ({ page, pageSize = 10 }: PaginateProps) => {
-  return http
-    .get<Array<ICharacterData>>("/characters/", {
-      params: { page, pageSize },
-    })
-    .then((response) => {
-      const result = response.data.map((obj) => {
-        const { pathname } = new URL(obj.url);
-        const id = parseInt(pathname.replace("/api/characters/", ""), 10);
-        return { ...obj, id };
-      });
-
-      return result;
-    });
+const fetch = (params: ApiParams): Promise<ICharacterData[]> => {
+  return (
+    http
+      .get<Array<ICharacterData>>("/characters/", { params })
+      // run http wrapper
+      .then((response) => {
+        // Retrieve id from ulr attr
+        const result = response.data.map((obj) => {
+          const id = getIndexFromURL(obj.url);
+          return { ...obj, id };
+        });
+        // return overriten response to the following function
+        return result;
+      })
+  );
 };
 
 const get = (id: number) => {
@@ -27,8 +25,7 @@ const get = (id: number) => {
 };
 
 const CharacterService = {
-  getAll,
-  paginate,
+  fetch,
   get,
 };
 
