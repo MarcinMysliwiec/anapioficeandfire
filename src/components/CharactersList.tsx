@@ -72,17 +72,18 @@ function CharactersList() {
   const changeIsOpened = (isOpened: boolean): void =>
     setModalData({ ...modalData, isOpened });
 
+  const changePageAndPageSize = ({ page, pageSize }: ApiParams) => {
+    setApiParams({
+      ...apiParams,
+      page,
+      pageSize,
+    });
+  };
+
   const changePage = (page: number): void => {
     setApiParams({
       ...apiParams,
       page,
-    });
-  };
-
-  const changePageSize = (pageSize: number): void => {
-    setApiParams({
-      ...apiParams,
-      pageSize,
     });
   };
 
@@ -136,7 +137,17 @@ function CharactersList() {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    changePageSize(parseInt(event.target.value, 10));
+    const newPageSize = parseInt(event.target.value, 10);
+    const { page, pageSize } = apiParams;
+
+    let newPage;
+    if (newPageSize > pageSize) {
+      newPage = Math.ceil((page * pageSize) / newPageSize);
+    } else {
+      newPage = Math.floor((page * pageSize - 1) / newPageSize);
+    }
+    console.log(page, newPage, pageSize, newPageSize);
+    changePageAndPageSize({ page: newPage, pageSize: newPageSize });
   };
 
   const handleOpenGenderFilter = (): void => {
