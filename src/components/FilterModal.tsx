@@ -28,7 +28,7 @@ const style = {
   },
   content: {
     width: "100%",
-    padding: "1rem 0",
+    paddingTop: "1rem",
   },
   buttonWrapper: {
     width: "100%",
@@ -39,7 +39,10 @@ const style = {
     width: "100%",
   },
   button: {
-    margin: "1rem 0",
+    marginTop: "1rem",
+    marginBottom: "0",
+
+    fontSize: "1rem",
   },
 };
 
@@ -157,7 +160,7 @@ function FilterModal({
               color="primary"
               onClick={applyFilters}
             >
-              Contained
+              Apply
             </Button>
           </Box>
         </Box>

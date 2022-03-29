@@ -20,13 +20,8 @@ const fetch = (params: ApiParams): Promise<ICharacterData[]> => {
   );
 };
 
-const get = (id: number) => {
-  return http.get<ICharacterData>(`/characters/${id}`);
-};
-
 const CharacterService = {
   fetch,
-  get,
 };
 
 export default CharacterService;

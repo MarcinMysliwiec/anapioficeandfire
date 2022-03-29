@@ -7,6 +7,12 @@ const cellStyle = {
   display: "flex",
 };
 
+const style = {
+  button: {
+    cursor: "pointer",
+  },
+};
+
 type Props = {
   children: string;
   apiPayload: ApiParams;
@@ -23,9 +29,12 @@ function FilterCell({
   return (
     <TableCell>
       <Box sx={cellStyle}>
-        {children} <FilterAltOutlined onClick={handleClick} />
+        {children} <FilterAltOutlined sx={style.button} onClick={handleClick} />
         {children.toLowerCase() in apiPayload && (
-          <Close onClick={() => handleClearFilters(children)} />
+          <Close
+            sx={style.button}
+            onClick={() => handleClearFilters(children)}
+          />
         )}
       </Box>
     </TableCell>

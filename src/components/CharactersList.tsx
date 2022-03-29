@@ -1,5 +1,5 @@
 import {
-  Container,
+  Box,
   Paper,
   Table,
   TableBody,
@@ -20,17 +20,17 @@ import CultureCell from "./CultureCell";
 import FilterCell from "./FilterCell";
 import FilterModal from "./FilterModal";
 
-const defaultApiParams: ApiParams = {
+const initialApiParams: ApiParams = {
   page: 1,
   pageSize: 10,
 };
 
-const defaultPaginationData: PaginateProps = {
+const initialPaginationData: PaginateProps = {
   count: 2138,
   rowsPerPage: [10, 25, 50],
 };
 
-const defaultModalData: FilterModalProps = {
+const initialModalData: FilterModalProps = {
   isOpened: false,
   header: null,
   filter: {
@@ -41,11 +41,11 @@ const defaultModalData: FilterModalProps = {
 };
 
 function CharactersList() {
-  const [apiParams, setApiParams] = useState<ApiParams>(defaultApiParams);
+  const [apiParams, setApiParams] = useState<ApiParams>(initialApiParams);
   const [characters, setCharacters] = useState<Array<ICharacterData>>([]);
-  const [pagination] = useState<PaginateProps>(defaultPaginationData);
+  const [pagination] = useState<PaginateProps>(initialPaginationData);
   const [modalData, setModalData] =
-    useState<FilterModalProps>(defaultModalData);
+    useState<FilterModalProps>(initialModalData);
 
   const changeIsOpened = (isOpened: boolean): void =>
     setModalData({ ...modalData, isOpened });
@@ -145,7 +145,7 @@ function CharactersList() {
   }, [apiParams]);
 
   return (
-    <Container>
+    <Box>
       <Typography variant="h4" gutterBottom component="div">
         Characters List
       </Typography>
@@ -209,7 +209,7 @@ function CharactersList() {
           showLastButton
         />
       </Paper>
-    </Container>
+    </Box>
   );
 }
 

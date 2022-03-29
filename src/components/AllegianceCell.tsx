@@ -1,7 +1,15 @@
 import { TableCell } from "@mui/material";
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom";
 import ICharacterData from "../types/Character";
 import { getIndexFromURL } from "../helpers/string";
+
+const style = {
+  link: {
+    display: "block",
+    padding: "0.25rem",
+  },
+};
 
 type Props = {
   children: ICharacterData;
@@ -16,12 +24,17 @@ function AllegianceCell({ children }: Props) {
         {allegiances.map((url) => {
           const allegianceId = getIndexFromURL(url);
           return (
-            <a
-              href={url}
-              key={`${character.id || 0}-${allegianceId.toString()}`}
+            <Link
+              style={style.link}
+              to={{
+                pathname: `/${allegianceId.toString()}`,
+              }}
+              key={`character${
+                character.id || 0
+              }-allegiance${allegianceId.toString()}`}
             >
               {allegianceId.toString()}
-            </a>
+            </Link>
           );
         })}
       </div>
