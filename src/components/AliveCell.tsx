@@ -10,6 +10,7 @@ import {
 type Props = {
   children: ICharacterData;
 };
+
 function AliveCell({ children }: Props) {
   const aliveGetter = (character: ICharacterData) => {
     const { born, died } = character;
