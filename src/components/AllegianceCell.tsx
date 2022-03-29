@@ -27,7 +27,7 @@ function AllegianceCell({ children }: Props) {
             <Link
               style={style.link}
               to={{
-                pathname: `/${allegianceId.toString()}`,
+                pathname: `/house/${allegianceId.toString()}`,
               }}
               key={`character${
                 character.id || 0

@@ -16,8 +16,8 @@ function App() {
   return (
     <Container sx={style.container}>
       <Routes>
-        <Route path="/" element={<CharactersList />} />
-        <Route path="/:id" element={<House />} />
+        <Route path="/house/:id" element={<House />} />
+        <Route path="/*" element={<CharactersList />} />
       </Routes>
     </Container>
   );

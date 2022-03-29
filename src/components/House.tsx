@@ -1,9 +1,10 @@
 import { Box, Button, Grid, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import HouseService from "../services/HouseService";
 import IHouseData from "../types/House";
+
 // import HouseItem from "./HouseItem";
 
 const style = {
@@ -84,6 +85,7 @@ type Params = {
 };
 
 function House() {
+  const navigate = useNavigate();
   const { id } = useParams<Params>();
 
   const [currentHouse, setCurrentHouse] =
@@ -99,13 +101,17 @@ function House() {
       });
   };
 
+  const goToPreviousPath = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     if (id) getHouse(id);
   }, [id]);
 
   return (
     <Box sx={style.wrapper}>
-      <Button component={Link} to="/" variant="contained">
+      <Button onClick={goToPreviousPath} variant="contained">
         Go Back
       </Button>
 

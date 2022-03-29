@@ -11,6 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import CharacterDataService from "../services/CharacterService";
 import ICharacterData from "../types/Character";
 import { ApiParams, FilterModalProps, PaginateProps } from "../types/Props";
@@ -22,7 +27,7 @@ import FilterModal from "./FilterModal";
 
 const initialApiParams: ApiParams = {
   page: 1,
-  pageSize: 10,
+  pageSize: 25,
 };
 
 const initialPaginationData: PaginateProps = {
@@ -40,8 +45,25 @@ const initialModalData: FilterModalProps = {
   },
 };
 
+const useNavigateSearch = () => {
+  const navigate = useNavigate();
+  return (pathname: string, params: {}) =>
+    navigate({ pathname, search: `?${createSearchParams(params)}` });
+};
+
 function CharactersList() {
-  const [apiParams, setApiParams] = useState<ApiParams>(initialApiParams);
+  const [searchParams] = useSearchParams();
+  const navigateSearch = useNavigateSearch();
+  const [apiParams, setApiParams] = useState<ApiParams>({
+    page: parseInt(
+      searchParams.get("page") || initialApiParams.page.toString(),
+      10,
+    ),
+    pageSize: parseInt(
+      searchParams.get("pageSize") || initialApiParams.pageSize.toString(),
+      10,
+    ),
+  });
   const [characters, setCharacters] = useState<Array<ICharacterData>>([]);
   const [pagination] = useState<PaginateProps>(initialPaginationData);
   const [modalData, setModalData] =
@@ -79,6 +101,7 @@ function CharactersList() {
   };
 
   const fetchData = (props: ApiParams): void => {
+    navigateSearch("/", { ...props });
     CharacterDataService.fetch(props)
       .then((data: ICharacterData[]) => {
         setCharacters([...data]);
